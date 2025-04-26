@@ -52,5 +52,4 @@ func main() {
 	if err := srv.Start(); err != nil {
 		log.Fatal("Error starting server: ", err)
 	}
-	// 1.43.03
 }
