@@ -18,7 +18,7 @@ func (s *AccountService) CreateAccount(input dto.CreateAccountInput) (*dto.Accou
 
 	existingAccount, err := s.repository.FindByAPIKey(account.APIKey)
 
-	if err != nil && err != domain.ErrAccountNotFound{
+	if err != nil && err != domain.ErrAccountNotFound {
 		return nil, err
 	}
 
