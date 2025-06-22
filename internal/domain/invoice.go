@@ -18,7 +18,7 @@ const (
 type Invoice struct {
 	ID             string
 	AccountID      string
-	Amount float64
+	Amount 				 float64
 	Status         Status
 	Description    string
 	PaymentType    string
@@ -35,7 +35,7 @@ type CreditCard struct {
 	CardholderName string
 }
 
-func NewInvoice(accountID string, amount float64, description string, paymentType string, card *CreditCard) (*Invoice, error) {
+func NewInvoice(accountID string, amount float64, description string, paymentType string, card CreditCard) (*Invoice, error) {
 	if amount <= 0  {
 		return nil, ErrInvalidAmount
 	}
@@ -75,7 +75,7 @@ func (i *Invoice) Process() error {
 }
 
 func (i *Invoice) UpdateStatus(newStatus Status) error {
-	if newStatus != StatusPending {
+	if i.Status != StatusPending {
 		return ErrInvalidStatus
 	}
 

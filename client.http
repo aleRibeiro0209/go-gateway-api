@@ -1,8 +1,6 @@
 ### Variáveis globais
 @baseUrl = http://localhost:8080
-@apiKey = 33709ceec387099edac3a3a81be489f0 
-
-# {{createAccount.response.body.api_key}}
+@apiKey = {{createAccount.response.body.api_key}}
 
 ### Criar uma nova conta
 # @name createAccount
@@ -16,4 +14,36 @@ Content-Type: application/json
 
 ### Obter dados da conta
 GET {{baseUrl}}/accounts
+X-API-Key: {{apiKey}}
+
+### Criar uma nova fatura
+# @name createInvoice
+POST {{baseUrl}}/invoice
+Content-Type: application/json
+X-API-Key: {{apiKey}}
+
+{
+  "amount": 15000,
+  "description": "Teste de fatura com valor alto",
+  "payment_type": "credit_card",
+  "card_number": "41111111111111111111111111",
+  "cvv": "123",
+  "expiry_month": 12,
+  "expiry_year": 2025,
+  "cardholder_name": "John Doe"
+}
+
+### Buscar fatura por id
+# @name GetByID
+
+@invoiceID = {{createInvoice.response.body.id}}
+GET {{baseUrl}}/invoice/{{invoiceID}}
+Content-Type: application/json
+X-API-Key: {{apiKey}}
+
+### Listar faturas por conta
+# @name ListByAccount
+
+GET {{baseUrl}}/invoice
+Content-Type: application/json
 X-API-Key: {{apiKey}}
